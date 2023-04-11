@@ -1,0 +1,34 @@
+name: emovied
+description: An app to search for movie suggestion.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  carousel_slider: ^4.2.1
+  shimmer: ^2.0.0
+  cached_network_image: ^3.2.3
+  http: ^0.13.5
+  flutter_bloc: ^8.1.2
+  equatable: ^2.0.5
+  flutter_native_splash: ^2.2.19
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+flutter_native_splash:
+  color: "#000000"
+  image: lib/assets/emovied_logo.png
+  android: true
+  ios: true
+assets:
+  - lib/assets/emovied_logo.png
+
+
+flutter:
+  uses-material-design: true
