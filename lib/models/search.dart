@@ -46,6 +46,53 @@ class MultiSearch {
       this.knownForDepartment,
       this.profilePath});
 
+  MultiSearch copy({
+    bool? adult,
+    String? backdropPath,
+    int? id,
+    String? title,
+    String? originalLanguage,
+    String? originalTitle,
+    String? overview,
+    String? posterPath,
+    String? mediaType,
+    List<int>? genreIds,
+    String? releaseDate,
+    String? firstAirDate,
+    bool? video,
+    int? voteCount,
+    double? voteAverage,
+    double? popularity,
+    String? originalName,
+    String? name,
+    int? gender,
+    String? knownForDepartment,
+    String? profilePath,
+  }) =>
+      MultiSearch(
+        adult: adult ?? this.adult,
+        backdropPath: backdropPath ?? this.backdropPath,
+        id: id ?? this.id,
+        title: title ?? this.title,
+        originalLanguage: originalLanguage ?? this.originalLanguage,
+        originalTitle: originalTitle ?? this.originalTitle,
+        overview: overview ?? this.overview,
+        posterPath: posterPath ?? this.posterPath,
+        mediaType: mediaType ?? this.mediaType,
+        genreIds: genreIds ?? this.genreIds,
+        releaseDate: releaseDate ?? this.releaseDate,
+        firstAirDate: firstAirDate ?? this.firstAirDate,
+        video: video ?? this.video,
+        voteCount: voteCount ?? this.voteCount,
+        voteAverage: voteAverage ?? this.voteAverage,
+        popularity: popularity ?? this.popularity,
+        originalName: originalName ?? this.originalName,
+        name: name ?? this.name,
+        gender: gender ?? this.gender,
+        knownForDepartment: knownForDepartment ?? this.knownForDepartment,
+        profilePath: profilePath ?? this.profilePath,
+      );
+
   MultiSearch.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];

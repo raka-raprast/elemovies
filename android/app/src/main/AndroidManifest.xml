@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.elemovie">
    <application
-        android:label="elemovie"
+        android:label="Emovied"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

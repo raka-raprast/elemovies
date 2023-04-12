@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:emovied/main_export.dart';
+import 'package:emovied/screens/watchlist_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -13,6 +14,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _tabScreen = const [
     HomeScreen(),
     SearchScreen(),
+    WatchlistScreen(),
   ];
   int _selectedIndex = 0;
   void _onItemTapped(int index) {
@@ -40,6 +42,10 @@ class _MainScreenState extends State<MainScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.bookmark),
             label: 'Search',
           ),
         ],

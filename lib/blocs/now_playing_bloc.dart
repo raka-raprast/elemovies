@@ -3,8 +3,6 @@
 import 'dart:developer';
 
 import 'package:emovied/main_export.dart';
-import 'package:emovied/models/show.dart';
-import 'package:emovied/utils/api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

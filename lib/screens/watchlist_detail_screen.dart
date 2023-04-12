@@ -2,12 +2,13 @@
 
 import 'package:emovied/blocs/watchlist_bloc.dart';
 import 'package:emovied/main_export.dart';
-import 'package:emovied/models/saved_show.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ShowSearchDetailScreen extends StatelessWidget {
-  const ShowSearchDetailScreen({super.key, required this.shows});
-  final MultiSearch shows;
+import '../models/saved_show.dart';
+
+class ShowWatchlistDetailScreen extends StatelessWidget {
+  const ShowWatchlistDetailScreen({super.key, required this.shows});
+  final SavedShows shows;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

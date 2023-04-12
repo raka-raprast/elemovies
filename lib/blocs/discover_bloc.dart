@@ -3,8 +3,6 @@
 import 'dart:developer';
 
 import 'package:emovied/main_export.dart';
-import 'package:emovied/models/show.dart';
-import 'package:emovied/utils/api.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -101,10 +99,10 @@ class DiscoverBloc extends Bloc<DiscoverEvent, DiscoverState> {
     on<DiscoverGetPopularTVShowEvent>(getPopularTVShowList);
     on<DiscoverGetTopRatedMovieEvent>(getTopRatedMovieList);
     on<DiscoverGetTopRatedTVShowEvent>(getTopRatedTVShowList);
-    on<DiscoverInitMovieEvent>(initPopularModeList);
+    on<DiscoverInitMovieEvent>(initPopularMovieList);
   }
 
-  void initPopularModeList(DiscoverInitMovieEvent event, Emitter<DiscoverState> state) async {
+  void initPopularMovieList(DiscoverInitMovieEvent event, Emitter<DiscoverState> state) async {
     emit(DiscoverLoadingState());
     add(DiscoverGetPopularMovieEvent());
   }

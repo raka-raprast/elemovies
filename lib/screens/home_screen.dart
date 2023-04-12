@@ -38,6 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 options: CarouselOptions(
                   height: Sizes.height(context) * .35,
                   viewportFraction: 1,
+                  autoPlay: true,
                 ),
                 items: state.trendingResponse.map((e) {
                   return Builder(
@@ -46,69 +47,52 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(builder: (context) => ShowDetailScreen(shows: e)));
                         },
-                        child: Stack(
-                          children: [
-                            ImageWidget(
-                              imageUrl: e.backdropPath != null
-                                  ? "https://image.tmdb.org/t/p/w500${e.backdropPath!}"
-                                  : e.posterPath != null
-                                      ? "https://image.tmdb.org/t/p/w500${e.posterPath!}"
-                                      : "",
-                              width: Sizes.width(context),
-                              height: Sizes.height(context) * .35,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Container(
-                                height: Sizes.height(context) * .175,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  gradient: LinearGradient(begin: FractionalOffset.topCenter, end: FractionalOffset.bottomCenter, colors: [
-                                    Colors.black.withOpacity(0.0),
-                                    Colors.black,
-                                  ], stops: const [
-                                    0.0,
-                                    0.95,
-                                  ]),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 10),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  if (e.adult != null && e.adult!)
-                                    Align(
-                                      alignment: Alignment.topRight,
-                                      child: Text(
-                                        "18+",
-                                        style: TextStyle(color: Colors.pink, fontSize: 22, fontWeight: FontWeight.bold),
+                        child: GradientImage(
+                            imageUrl: e.backdropPath != null
+                                ? "https://image.tmdb.org/t/p/w500${e.backdropPath!}"
+                                : e.posterPath != null
+                                    ? "https://image.tmdb.org/t/p/w500${e.posterPath!}"
+                                    : "",
+                            stops: const [
+                              0.0,
+                              0.95,
+                            ],
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    if (e.adult != null && e.adult!)
+                                      Align(
+                                        alignment: Alignment.topRight,
+                                        child: Text(
+                                          "18+",
+                                          style: TextStyle(color: Colors.pink, fontSize: 22, fontWeight: FontWeight.bold),
+                                        ),
                                       ),
+                                    Container(),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(e.title ?? e.name ?? "", maxLines: 2, style: CustomTextStyle.title()),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                          e.overview!,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.justify,
+                                          style: CustomTextStyle.subtitle(),
+                                        ),
+                                      ],
                                     ),
-                                  Container(),
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Text(e.title ?? e.name ?? "", maxLines: 2, style: CustomTextStyle.title()),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Text(
-                                        e.overview!,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                        textAlign: TextAlign.justify,
-                                        style: CustomTextStyle.subtitle(),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                                  ],
+                                ),
+                              )
+                            ]),
                       );
                     },
                   );
@@ -145,6 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     options: CarouselOptions(
                       height: Sizes.height(context) * .35,
                       viewportFraction: 0.5,
+                      scrollPhysics: NeverScrollableScrollPhysics(),
                     ),
                     items: [
                       Container(
@@ -231,7 +216,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 discoverChip: discoverChip,
                 buildList: (context) {
                   if (state is DiscoverLoadingState) {
-                    return CircularProgressIndicator();
+                    return CarouselSlider(
+                      options: CarouselOptions(
+                        height: Sizes.height(context) * .35,
+                        viewportFraction: 0.5,
+                        scrollPhysics: NeverScrollableScrollPhysics(),
+                      ),
+                      items: [
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.blue, width: .5),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          width: Sizes.width(context),
+                          height: Sizes.height(context) * .35,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(15),
+                            child: Shimmer.fromColors(
+                              baseColor: const Color.fromARGB(255, 30, 30, 30).withOpacity(.8),
+                              highlightColor: Colors.blue.withOpacity(.6),
+                              child: Container(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    );
                   } else if (state is DiscoverErrorState) {
                     return Text(
                       "Error please try again later",
