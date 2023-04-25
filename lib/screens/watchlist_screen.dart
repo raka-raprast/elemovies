@@ -43,20 +43,20 @@ class _WatchlistScreenState extends State<WatchlistScreen> {
                       (e) => WatchlistWidget(
                         shows: e,
                         onTap: (item) {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ShowWatchlistDetailScreen(shows: item)));
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ShowWatchlistDetailScreen(shows: item))).then((value) {
+                            BlocProvider.of<WatchlistBloc>(context).add(WatchlistGetListIDEvent());
+                          });
                         },
                       ),
                     )
                     .toList(),
               ),
             if (state is WatchlistLoadedIDState && state.savedShowResponse.shows.isEmpty)
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: Text(
-                    "Start add your favourite movie to your Watchlist",
-                    style: TextStyle(fontSize: 18, color: Colors.white.withOpacity(.5)),
-                  ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+                child: Text(
+                  "Start add your favourite movie to your Watchlist",
+                  style: TextStyle(fontSize: 18, color: Colors.white.withOpacity(.5),),
                 ),
               ),
           ],

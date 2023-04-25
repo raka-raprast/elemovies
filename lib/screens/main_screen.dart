@@ -27,7 +27,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(child: _tabScreen[_selectedIndex]),
+      body: SafeArea(
+        top: false,
+        child: _tabScreen[_selectedIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromARGB(255, 3, 20, 34),
         selectedItemColor: Colors.blue,
